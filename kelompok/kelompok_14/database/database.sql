@@ -1,10 +1,8 @@
--- Database: fixtrack
-
+-- Buat database
 CREATE DATABASE IF NOT EXISTS fixtrack;
 USE fixtrack;
 
--- Table: users
--- Stores admin and technician accounts
+-- Tabel user (admin & teknisi)
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -14,8 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Table: servis
--- Stores service transactions and tracking info
+-- Tabel servis (transaksi)
 CREATE TABLE IF NOT EXISTS servis (
     id INT AUTO_INCREMENT PRIMARY KEY,
     no_resi VARCHAR(20) NOT NULL UNIQUE,
@@ -33,8 +30,7 @@ CREATE TABLE IF NOT EXISTS servis (
     FOREIGN KEY (id_teknisi) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Insert default admin for initial access (password: admin123)
--- Note: In production, use password hashing (e.g., password_hash in PHP)
+-- Akun default (password: admin123 / teknisi123)
 INSERT INTO users (username, password, nama, role) VALUES 
 ('admin', 'admin123', 'Administrator', 'admin'),
 ('teknisi', 'teknisi123', 'Teknisi 1', 'teknisi');
