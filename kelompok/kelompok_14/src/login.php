@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FixTrack</title>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1e3a8a', // Navy Blue
+                        primaryHover: '#172554', // Navy Gelap
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white min-h-screen flex overflow-hidden">
+
+    <!-- Bagian Kiri (Gambar) -->
+    <div class="hidden lg:block lg:w-1/2 relative">
+        <img src="assets/photos/foto_komponen.jpeg" alt="Komponen Elektronik" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
+        <div class="absolute bottom-0 left-0 p-12 text-white z-10">
+            <h2 class="text-4xl font-bold mb-4">FixTrack System</h2>
+            <p class="text-lg text-blue-100 max-w-md">Solusi terpercaya untuk manajemen servis elektronik Anda. Pantau status perbaikan secara real-time.</p>
+        </div>
+    </div>
+
+    <!-- Bagian Kanan (Form) -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-slate-50 relative">
+        
+        <!-- Hiasan Background -->
+        <div class="absolute top-0 right-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
+        </div>
+
+        <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-10 border border-slate-100">
+            
+            <!-- Logo -->
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-extrabold text-primary mb-2 tracking-tight">Selamat Datang</h1>
+                <p class="text-slate-500 font-medium">Silakan login untuk melanjutkan</p>
+            </div>
+
+            <form id="loginForm" action="" method="POST" class="space-y-6">
+                
+                <!-- Input Username -->
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-slate-400 group-focus-within:text-primary transition-colors duration-300"></i>
+                    </div>
+                    <input type="text" id="username" name="username" 
+                        class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 font-medium" 
+                        placeholder="Username" autocomplete="off">
+                    <p class="error-message hidden text-red-500 text-xs mt-1 font-medium pl-1"></p>
+                </div>
+
+                <!-- Input Password -->
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-lock text-slate-400 group-focus-within:text-primary transition-colors duration-300"></i>
+                    </div>
+                    <input type="password" id="password" name="password" 
+                        class="block w-full pl-11 pr-11 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 font-medium" 
+                        placeholder="Password">
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
+                        <i class="fas fa-eye text-slate-400 hover:text-primary transition-colors duration-300" id="togglePassword"></i>
+                    </div>
+                    <p class="error-message hidden text-red-500 text-xs mt-1 font-medium pl-1"></p>
+                </div>
+
+                <!-- Tombol Masuk -->
+                <button type="submit" class="w-full bg-primary hover:bg-primaryHover text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex justify-center items-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+
+                <!-- Link Tambahan -->
+                <div class="flex flex-col items-center space-y-4 mt-6 pt-6 border-t border-slate-100">
+                    <a href="#" class="text-slate-500 hover:text-primary font-medium transition-colors text-sm">
+                        Lupa password? <span class="text-primary font-semibold">Hubungi Admin</span>
+                    </a>
+                    <a href="index.php" class="flex items-center gap-2 text-slate-500 hover:text-primary font-medium transition-colors text-sm group">
+                        <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i> Kembali ke Beranda
+                    </a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Copyright (HP) -->
+        <div class="absolute bottom-4 text-center w-full lg:hidden">
+            <p class="text-slate-400 text-xs">&copy; 2025 FixTrack System.</p>
+        </div>
+    </div>
+
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script JS -->
+    <script src="assets/js/login.js"></script>
+</body>
+</html>
