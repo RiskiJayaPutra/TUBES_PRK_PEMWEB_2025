@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS servis (
     kelengkapan TEXT NOT NULL,
     keluhan_awal TEXT NOT NULL,
     kerusakan_fix TEXT NULL,
+    estimasi_hari INT NULL, -- Kolom baru untuk estimasi hari
     biaya DECIMAL(10, 2) NULL,
     status ENUM('Barang Masuk', 'Pengecekan', 'Menunggu Sparepart', 'Pengerjaan', 'Selesai', 'Batal', 'Diambil') DEFAULT 'Barang Masuk',
     FOREIGN KEY (id_teknisi) REFERENCES users(id) ON DELETE SET NULL
