@@ -1,22 +1,13 @@
 <?php
 session_start();
-
-// 1. HUBUNGKAN KONEKSI (Naik satu folder ke src/config.php)
 include '../config.php';
 
-// --- MODE TESTING (BYPASS LOGIN) ---
-// Matikan blok ini jika sudah siap live
-/*
+// Cek Login
 if (!isset($_SESSION['id_user'])) {
     header("Location: ../login.php");
     exit();
 }
 $id_user = $_SESSION['id_user'];
-*/
-
-// PAKSA ID USER JADI 1 (ADMIN)
-$id_user = 1; 
-// --- AKHIR MODE TESTING ---
 
 // AMBIL DATA USER
 $query = "SELECT * FROM users WHERE id = '$id_user'";

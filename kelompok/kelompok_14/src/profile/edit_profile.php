@@ -2,7 +2,7 @@
 session_start();
 include '../config.php'; 
 
-// --- 2. CEK LOGIN ---
+// Cek Login
 if (!isset($_SESSION['id_user'])) {
     header("Location: ../login.php");
     exit();

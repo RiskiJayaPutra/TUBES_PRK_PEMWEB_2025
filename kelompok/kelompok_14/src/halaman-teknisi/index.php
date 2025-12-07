@@ -18,34 +18,35 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="sticky top-0 z-40 w-full bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-    <div class="flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <div class="bg-blue-600 text-white p-2 rounded-lg">
-          <i class="fas fa-tools"></i>
-        </div>
-        <div>
-          <h1 class="text-xl font-bold text-gray-800">FixTrack <span class="text-blue-600 font-normal">Teknisi</span></h1>
-        </div>
+
+<!-- Header -->
+<header class="sticky top-0 z-40 w-full bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="bg-blue-600 text-white p-2 rounded-lg">
+        <i class="fas fa-tools"></i>
       </div>
-      <div class="flex items-center gap-4">
-        <span class="text-gray-600 text-sm">Halo, Teknisi</span>
-        <a href="profile.html" class="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-          Profile
-        </a>
-        <a href="login.html" class="text-red-600 hover:text-red-700 flex items-center gap-1 text-sm font-medium">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          Logout
-        </a>
+      <div>
+        <h1 class="text-xl font-bold text-gray-800">FixTrack <span class="text-blue-600 font-normal">Teknisi</span></h1>
       </div>
     </div>
-  </header>
+
+    <div class="flex items-center gap-4">
+      <span class="text-gray-600 text-sm">Halo, Teknisi</span>
+
+      <!-- tombol profil -->
+      <a href="../profile/profile.php" class="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">
+        <i class="fas fa-user"></i> Profil
+      </a>
+
+      <!-- tombol logout -->
+      <a href="../login.php" class="text-red-600 hover:text-red-700 flex items-center gap-1 text-sm font-medium">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </div>
+</header>
+
 
   <!-- Main Content -->
   <main class="p-6 space-y-6">

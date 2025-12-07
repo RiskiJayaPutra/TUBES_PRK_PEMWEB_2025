@@ -45,20 +45,30 @@ $recent_result = $conn->query($sql_recent);
 <body class="bg-slate-50 min-h-screen">
 
     <!-- Navbar -->
-    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm sticky top-0 z-30">
-        <div class="flex items-center gap-3">
-            <div class="bg-blue-600 text-white p-2 rounded-lg">
-                <i class="fas fa-tools"></i>
-            </div>
-            <h1 class="text-xl font-bold text-slate-800">FixTrack <span class="text-blue-600">Admin</span></h1>
+<nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm sticky top-0 z-30">
+    <div class="flex items-center gap-3">
+        <div class="bg-blue-600 text-white p-2 rounded-lg">
+            <i class="fas fa-tools"></i>
         </div>
-        <div class="flex items-center gap-4">
-            <span class="text-slate-600 text-sm font-medium">Halo, Admin</span>
-            <a href="../login.php" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                <i class="fas fa-sign-out-alt mr-2"></i> Logout
-            </a>
-        </div>
-    </nav>
+        <h1 class="text-xl font-bold text-slate-800">
+            FixTrack <span class="text-blue-600">Admin</span>
+        </h1>
+    </div>
+
+    <div class="flex items-center gap-4">
+        <span class="text-slate-600 text-sm font-medium">Halo, Admin</span>
+
+        <!-- Perbaikan link ke profile.php -->
+        <a href="../profile/profile.php" class="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">
+            <i class="fas fa-user"></i> Profil
+        </a>
+
+        <!-- Perbaikan link ke login.php -->
+        <a href="../login.php" class="text-red-600 hover:text-red-700 flex items-center gap-1 text-sm font-medium">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+</nav>
 
     <div class="container mx-auto px-6 py-8">
         
