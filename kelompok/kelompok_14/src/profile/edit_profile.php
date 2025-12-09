@@ -104,7 +104,7 @@ tailwind.config = {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             <a href="../dashboard.php" class="flex items-center gap-2 hover:opacity-90 transition">
-                <i class="fas fa-tools text-accent text-xl"></i>
+                <img src="../assets/photos/logo.png" alt="FixTrack" class="h-16 w-16 object-contain">
                 <span class="font-bold text-xl tracking-tight">
                     FixTrack <span class="font-normal text-blue-200">Edit Profil</span>
                 </span>

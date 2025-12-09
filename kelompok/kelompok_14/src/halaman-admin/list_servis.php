@@ -129,7 +129,7 @@ $result = $conn->query($query);
                                     <td class="px-6 py-4 text-center">
                                         <div class="flex justify-center gap-2">
                                             <!-- Tombol Aksi Detail/Edit -->
-                                            <a href="#" class="bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 p-2 rounded-lg transition-all" title="Detail">
+                                            <a href="edit_servis.php?id=<?php echo $row['id']; ?>" class="bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 p-2 rounded-lg transition-all" title="Edit">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             

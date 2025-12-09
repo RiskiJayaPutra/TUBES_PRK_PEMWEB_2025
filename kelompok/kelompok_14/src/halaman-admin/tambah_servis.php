@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-slate-50 min-h-screen">
 
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="container mx-auto px-6 py-8 max-w-5xl">
         
         <!-- Header -->
         <div class="flex items-center gap-4 mb-8">

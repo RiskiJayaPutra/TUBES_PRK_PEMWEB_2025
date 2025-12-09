@@ -50,7 +50,7 @@ $status_color = $status_colors[$servis['status'] ?? ''] ?? 'bg-gray-500';
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <i class="fas fa-tools text-blue-600"></i>
+                <img src="../assets/photos/logo.png" alt="FixTrack" class="h-16 w-16 object-contain">
                 <span class="font-bold text-lg text-slate-800">FixTrack</span>
             </div>
             <a href="../login.php" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg font-medium">
@@ -106,6 +106,30 @@ $status_color = $status_colors[$servis['status'] ?? ''] ?? 'bg-gray-500';
 
                 <!-- Detail Servis -->
                 <div class="p-6">
+                    
+                    <!-- Timeline Tanggal -->
+                    <div class="mb-6">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase mb-4">Riwayat Tanggal</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <div class="text-xs text-blue-600 mb-1">Tanggal Diterima</div>
+                                <div class="font-bold text-slate-800"><?php echo $servis['tgl_masuk'] ? date('d M Y', strtotime($servis['tgl_masuk'])) : '-'; ?></div>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                                <div class="text-xs text-yellow-600 mb-1">Mulai Dikerjakan</div>
+                                <div class="font-bold text-slate-800"><?php echo $servis['tgl_mulai'] ? date('d M Y', strtotime($servis['tgl_mulai'])) : '-'; ?></div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <div class="text-xs text-green-600 mb-1">Selesai Dikerjakan</div>
+                                <div class="font-bold text-slate-800"><?php echo $servis['tgl_selesai'] ? date('d M Y', strtotime($servis['tgl_selesai'])) : '-'; ?></div>
+                            </div>
+                            <div class="bg-gray-100 p-4 rounded-lg text-center">
+                                <div class="text-xs text-gray-600 mb-1">Diambil Pemilik</div>
+                                <div class="font-bold text-slate-800"><?php echo $servis['tgl_keluar'] ? date('d M Y', strtotime($servis['tgl_keluar'])) : '-'; ?></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
                         <!-- Kolom Kiri -->
@@ -120,16 +144,6 @@ $status_color = $status_colors[$servis['status'] ?? ''] ?? 'bg-gray-500';
                                     <td class="py-2 text-slate-500">No. HP</td>
                                     <td class="py-2 text-slate-800"><?php echo $servis['no_hp']; ?></td>
                                 </tr>
-                                <tr>
-                                    <td class="py-2 text-slate-500">Tanggal Masuk</td>
-                                    <td class="py-2 text-slate-800"><?php echo date('d M Y', strtotime($servis['tgl_masuk'])); ?></td>
-                                </tr>
-                                <?php if ($servis['tgl_keluar']): ?>
-                                <tr>
-                                    <td class="py-2 text-slate-500">Tanggal Keluar</td>
-                                    <td class="py-2 text-slate-800"><?php echo date('d M Y', strtotime($servis['tgl_keluar'])); ?></td>
-                                </tr>
-                                <?php endif; ?>
                             </table>
                         </div>
 

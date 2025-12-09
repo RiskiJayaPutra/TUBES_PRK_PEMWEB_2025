@@ -53,7 +53,7 @@ $status_class = $status_colors[$servis['status']] ?? 'bg-slate-100 text-slate-70
 </head>
 <body class="bg-slate-50 min-h-screen">
 
-    <div class="container mx-auto px-4 py-8 max-w-3xl">
+    <div class="container mx-auto px-6 py-8 max-w-5xl">
         
         <!-- Header -->
         <div class="flex items-center gap-4 mb-8">

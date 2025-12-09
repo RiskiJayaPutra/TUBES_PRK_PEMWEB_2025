@@ -22,9 +22,7 @@
   <header class="sticky top-0 z-40 w-full bg-white shadow-sm border-b border-gray-200 px-6 py-4">
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="bg-blue-600 text-white p-2 rounded-lg">
-          <i class="fas fa-tools"></i>
-        </div>
+        <img src="../assets/photos/logo.png" alt="FixTrack" class="h-16 w-16 object-contain">
         <div>
           <h1 class="text-xl font-bold text-gray-800">FixTrack <span class="text-blue-600 font-normal">Teknisi</span></h1>
         </div>

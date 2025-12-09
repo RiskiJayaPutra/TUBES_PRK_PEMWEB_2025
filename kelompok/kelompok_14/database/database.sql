@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS servis (
     id INT AUTO_INCREMENT PRIMARY KEY,
     no_resi VARCHAR(20) NOT NULL UNIQUE,
     tgl_masuk DATETIME DEFAULT CURRENT_TIMESTAMP,
+    tgl_mulai DATETIME NULL,
+    tgl_selesai DATETIME NULL,
     tgl_keluar DATETIME NULL,
     id_teknisi INT NULL,
     nama_pelanggan VARCHAR(100) NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE IF NOT EXISTS servis (
     kelengkapan TEXT NOT NULL,
     keluhan_awal TEXT NOT NULL,
     kerusakan_fix TEXT NULL,
-    estimasi_hari INT NULL, -- Kolom baru untuk estimasi hari
+    estimasi_hari INT NULL,
     biaya DECIMAL(10, 2) NULL,
     status ENUM('Barang Masuk', 'Pengecekan', 'Menunggu Sparepart', 'Pengerjaan', 'Selesai', 'Batal', 'Diambil') DEFAULT 'Barang Masuk',
     FOREIGN KEY (id_teknisi) REFERENCES users(id) ON DELETE SET NULL
