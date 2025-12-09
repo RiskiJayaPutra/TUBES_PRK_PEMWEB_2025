@@ -1,3 +1,52 @@
+<?php
+session_start();
+require_once 'config.php';
+
+$error = '';
+
+// Proses login
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    if (empty($username) || empty($password)) {
+        $error = 'Username dan password wajib diisi!';
+    } else {
+        // Cek ke database
+        $stmt = $conn->prepare("SELECT id, username, password, nama, role FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $user = $result->fetch_assoc();
+            
+            // Cek password
+            if ($password === $user['password']) {
+                // Set session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['nama'] = $user['nama'];
+                $_SESSION['role'] = $user['role'];
+
+                // Redirect berdasarkan role
+                if ($user['role'] === 'admin') {
+                    header("Location: halaman-admin/index.php");
+                    exit();
+                } else {
+                    header("Location: halaman-teknisi/index.php");
+                    exit();
+                }
+            } else {
+                $error = 'Password salah!';
+            }
+        } else {
+            $error = 'Username tidak ditemukan!';
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -23,8 +72,8 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#1e3a8a', // Navy Blue
-                        primaryHover: '#172554', // Navy Gelap
+                        primary: '#1e3a8a',
+                        primaryHover: '#172554',
                         accent: '#3b82f6',
                     }
                 }
@@ -61,6 +110,13 @@
                 <p class="text-slate-500 font-medium">Silakan login untuk melanjutkan</p>
             </div>
 
+            <?php if ($error): ?>
+                <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+
             <form id="loginForm" action="" method="POST" class="space-y-6">
                 
                 <!-- Input Username -->
@@ -70,8 +126,7 @@
                     </div>
                     <input type="text" id="username" name="username" 
                         class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 font-medium" 
-                        placeholder="Username" autocomplete="off">
-                    <p class="error-message hidden text-red-500 text-xs mt-1 font-medium pl-1"></p>
+                        placeholder="Username" autocomplete="off" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
                 </div>
 
                 <!-- Input Password -->
@@ -85,7 +140,6 @@
                     <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
                         <i class="fas fa-eye text-slate-400 hover:text-primary transition-colors duration-300" id="togglePassword"></i>
                     </div>
-                    <p class="error-message hidden text-red-500 text-xs mt-1 font-medium pl-1"></p>
                 </div>
 
                 <!-- Tombol Masuk -->
@@ -111,9 +165,15 @@
         </div>
     </div>
 
-    <!-- Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Script JS -->
-    <script src="assets/js/login.js"></script>
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>
