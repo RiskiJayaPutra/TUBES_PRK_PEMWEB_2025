@@ -47,9 +47,7 @@ $recent_result = $conn->query($sql_recent);
     <!-- Navbar -->
 <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm sticky top-0 z-30">
     <div class="flex items-center gap-3">
-        <div class="bg-blue-600 text-white p-2 rounded-lg">
-            <i class="fas fa-tools"></i>
-        </div>
+        <img src="../assets/photos/logo.png" alt="FixTrack" class="h-16 w-16 object-contain">
         <h1 class="text-xl font-bold text-slate-800">
             FixTrack <span class="text-blue-600">Admin</span>
         </h1>

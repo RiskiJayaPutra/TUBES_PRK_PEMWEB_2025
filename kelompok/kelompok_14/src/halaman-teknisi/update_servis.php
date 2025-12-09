@@ -31,9 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
     $kerusakan_fix = $_POST['kerusakan_fix'];
     $biaya = $_POST['biaya'] ? floatval($_POST['biaya']) : null;
+    $tgl_mulai = $_POST['tgl_mulai'] ?: null;
+    $tgl_selesai = $_POST['tgl_selesai'] ?: null;
 
-    $stmt = $conn->prepare("UPDATE servis SET status = ?, kerusakan_fix = ?, biaya = ? WHERE id = ? AND id_teknisi = ?");
-    $stmt->bind_param("ssdii", $status, $kerusakan_fix, $biaya, $id, $teknisi_id);
+    $stmt = $conn->prepare("UPDATE servis SET status = ?, kerusakan_fix = ?, biaya = ?, tgl_mulai = ?, tgl_selesai = ? WHERE id = ? AND id_teknisi = ?");
+    $stmt->bind_param("ssdssii", $status, $kerusakan_fix, $biaya, $tgl_mulai, $tgl_selesai, $id, $teknisi_id);
 
     if ($stmt->execute()) {
         $success_msg = "Data servis berhasil diupdate!";
@@ -138,6 +140,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Kerusakan yang Diperbaiki</label>
                     <textarea name="kerusakan_fix" rows="3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-slate-400" placeholder="Jelaskan kerusakan yang sudah diperbaiki..."><?php echo htmlspecialchars($servis['kerusakan_fix'] ?? ''); ?></textarea>
+                </div>
+
+                <!-- Tanggal -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Tanggal Mulai Dikerjakan</label>
+                        <input type="date" name="tgl_mulai" value="<?php echo $servis['tgl_mulai'] ? date('Y-m-d', strtotime($servis['tgl_mulai'])) : ''; ?>" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Tanggal Selesai Dikerjakan</label>
+                        <input type="date" name="tgl_selesai" value="<?php echo $servis['tgl_selesai'] ? date('Y-m-d', strtotime($servis['tgl_selesai'])) : ''; ?>" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
                 </div>
 
                 <!-- Biaya -->
