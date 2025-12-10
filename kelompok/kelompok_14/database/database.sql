@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     nama VARCHAR(100) NOT NULL,
-    role ENUM('admin', 'teknisi') NOT NULL,
+    role ENUM('admin', 'teknisi', 'superadmin') NOT NULL,
     foto VARCHAR(255) NULL DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS servis (
 -- Akun default (password: admin123 / teknisi123)
 INSERT INTO users (username, password, nama, role) VALUES 
 ('admin', 'admin123', 'Administrator', 'admin'),
-('teknisi', 'teknisi123', 'Teknisi 1', 'teknisi');
+('teknisi', 'teknisi123', 'Teknisi 1', 'teknisi'),
+('superadmin', 'superadmin123', 'Super Administrator', 'superadmin');
 
 -- Tabel rincian biaya servis
 CREATE TABLE IF NOT EXISTS biaya_item (

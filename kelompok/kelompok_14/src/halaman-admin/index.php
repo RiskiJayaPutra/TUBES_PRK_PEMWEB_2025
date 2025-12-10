@@ -1,7 +1,22 @@
 <?php
+session_start();
 require_once '../config.php';
 
+// Cek Login
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../login.php");
+    exit();
+}
+
 // --- Ambil Statistik ---
+$admin_id = $_SESSION['user_id'];
+$stmt_admin = $conn->prepare("SELECT nama FROM users WHERE id = ?");
+$stmt_admin->bind_param("i", $admin_id);
+$stmt_admin->execute();
+$admin_nama = $stmt_admin->get_result()->fetch_assoc()['nama'] ?? 'Admin';
+$stmt_admin->close();
+
+// DEBUG (Akan dihapus nanti)
 // 1. Total Barang Masuk (Barang Masuk + Pengecekan + Menunggu Sparepart)
 $sql_masuk = "SELECT COUNT(*) as total FROM servis WHERE status IN ('Barang Masuk', 'Pengecekan', 'Menunggu Sparepart')";
 $total_masuk = $conn->query($sql_masuk)->fetch_assoc()['total'];
@@ -54,7 +69,7 @@ $recent_result = $conn->query($sql_recent);
     </div>
 
     <div class="flex items-center gap-4">
-        <span class="text-slate-600 text-sm font-medium">Halo, Admin</span>
+        <span class="text-slate-600 text-sm font-medium">Halo, <?php echo htmlspecialchars($admin_nama); ?></span>
 
         <!-- Perbaikan link ke profile.php -->
         <a href="../profile/profile.php" class="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">

@@ -1,23 +1,39 @@
 <?php
-require "../koneksi.php";
+session_start();
+require_once "../config.php";
 
-$id = $_GET['id'];
-$q = mysqli_query($conn, "SELECT * FROM users WHERE id=$id");
-$data = mysqli_fetch_assoc($q);
+// Cek Login Superadmin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
+    header("Location: ../login.php");
+    exit();
+}
+
+$id = intval($_GET['id']);
+$stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$data = $stmt->get_result()->fetch_assoc();
+
+if (!$data) {
+    echo "User tidak ditemukan!";
+    exit;
+}
 
 if (isset($_POST['submit'])) {
     $nama = $_POST['nama'];
     $username = $_POST['username'];
     $role = $_POST['role'];
 
-    mysqli_query($conn, "UPDATE users SET 
-        nama='$nama', 
-        username='$username',
-        role='$role'
-        WHERE id=$id");
+    // Optional: Update password logic could be added here if requested, but for now just profile.
+    $stmt_upd = $conn->prepare("UPDATE users SET nama = ?, username = ?, role = ? WHERE id = ?");
+    $stmt_upd->bind_param("sssi", $nama, $username, $role, $id);
 
-    header("Location: superadmin.php");
-    exit;
+    if ($stmt_upd->execute()) {
+        header("Location: superadmin.php");
+        exit;
+    } else {
+        echo "Gagal update user: " . $conn->error;
+    }
 }
 ?>
 
@@ -49,6 +65,7 @@ if (isset($_POST['submit'])) {
             <select name="role" class="w-full border p-2 rounded-lg mb-4">
                 <option value="admin" <?= $data['role']=='admin'?'selected':'' ?>>Admin</option>
                 <option value="teknisi" <?= $data['role']=='teknisi'?'selected':'' ?>>Teknisi</option>
+                <option value="superadmin" <?= $data['role']=='superadmin'?'selected':'' ?>>Superadmin</option>
             </select>
 
             <button name="submit"

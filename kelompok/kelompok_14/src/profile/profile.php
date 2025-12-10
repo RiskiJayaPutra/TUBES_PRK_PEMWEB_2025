@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php';
+require_once '../config.php';
 
 // Dukung kedua nama session key untuk kompatibilitas
 if (!isset($_SESSION['user_id']) && !isset($_SESSION['id_user'])) {
@@ -135,7 +135,11 @@ if (isset($user['role']) && $user['role'] === 'admin') {
                                 <?php
                                     if (!empty($user['created_at'])) {
                                         $date = date_create($user['created_at']);
-                                        echo date_format($date, "d F Y");
+                                        if ($date) {
+                                            echo date_format($date, "d F Y");
+                                        } else {
+                                            echo "-";
+                                        }
                                     } else {
                                         echo "-";
                                     }

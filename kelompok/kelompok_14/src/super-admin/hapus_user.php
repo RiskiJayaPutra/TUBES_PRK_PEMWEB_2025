@@ -1,9 +1,18 @@
 <?php
-require "../koneksi.php";
+session_start();
+require_once "../config.php";
 
-$id = $_GET['id'];
+// Cek Login Superadmin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
+    header("Location: ../login.php");
+    exit();
+}
 
-mysqli_query($conn, "DELETE FROM users WHERE id=$id");
+$id = intval($_GET['id']);
+$stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
 
 header("Location: superadmin.php");
 exit;
+?>

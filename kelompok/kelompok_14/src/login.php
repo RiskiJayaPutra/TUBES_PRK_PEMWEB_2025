@@ -53,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($user['role'] === 'admin') {
                     header("Location: halaman-admin/index.php");
                     exit();
+                } elseif ($user['role'] === 'superadmin') {
+                    header("Location: super-admin/superadmin_dashboard.php");
+                    exit();
                 } else {
                     header("Location: halaman-teknisi/index.php");
                     exit();

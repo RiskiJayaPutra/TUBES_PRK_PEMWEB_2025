@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php';
+require_once '../config.php';
 
 // Dukung kedua nama session key untuk kompatibilitas
 if (!isset($_SESSION['user_id']) && !isset($_SESSION['id_user'])) {
@@ -40,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             $success['profile'] = 'Profil berhasil diperbarui.';
             $user['nama'] = $nama;
             $user['username'] = $username;
+            
+            // Update session agar perubahan langsung terlihat
+            $_SESSION['nama'] = $nama;
+            $_SESSION['username'] = $username;
         } else {
             $errors['profile'] = 'Gagal menyimpan perubahan.';
         }

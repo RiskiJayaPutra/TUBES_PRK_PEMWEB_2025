@@ -1,5 +1,12 @@
 <?php
-require "../koneksi.php";
+session_start();
+require_once "../config.php";
+
+// Cek Login Superadmin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
+    header("Location: ../login.php");
+    exit();
+}
 
 // Ambil semua user
 $q_user = mysqli_query($conn, "SELECT * FROM users ORDER BY id DESC");

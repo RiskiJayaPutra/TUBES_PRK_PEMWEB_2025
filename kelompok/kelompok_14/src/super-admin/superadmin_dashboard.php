@@ -1,5 +1,12 @@
 <?php
-require "../koneksi.php";
+session_start();
+require_once "../config.php";
+
+// Cek Login Superadmin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
+    header("Location: ../login.php");
+    exit();
+}
 
 // PENDAPATAN
 $q_pendapatan = mysqli_query($conn, "SELECT SUM(biaya) AS total FROM servis");
