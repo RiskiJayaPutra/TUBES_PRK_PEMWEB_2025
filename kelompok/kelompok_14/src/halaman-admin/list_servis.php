@@ -58,9 +58,12 @@ $result = $conn->query($query);
                     <select name="status" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none cursor-pointer" onchange="this.form.submit()">
                         <option value="">Semua Status</option>
                         <option value="Barang Masuk" <?php echo $status_filter == 'Barang Masuk' ? 'selected' : ''; ?>>Barang Masuk</option>
+                        <option value="Pengecekan" <?php echo $status_filter == 'Pengecekan' ? 'selected' : ''; ?>>Pengecekan</option>
+                        <option value="Menunggu Sparepart" <?php echo $status_filter == 'Menunggu Sparepart' ? 'selected' : ''; ?>>Menunggu Sparepart</option>
                         <option value="Pengerjaan" <?php echo $status_filter == 'Pengerjaan' ? 'selected' : ''; ?>>Pengerjaan</option>
                         <option value="Selesai" <?php echo $status_filter == 'Selesai' ? 'selected' : ''; ?>>Selesai</option>
-                        <option value="Diambil" <?php echo $status_filter == 'Diambil' ? 'selected' : ''; ?>>Diambil</option>
+                        <option value="Diambil" <?php echo $status_filter == 'Diambil' ? 'selected' : ''; ?>>Sudah Diambil</option>
+                        <option value="Batal" <?php echo $status_filter == 'Batal' ? 'selected' : ''; ?>>Dibatalkan</option>
                     </select>
                 </div>
                 <button type="submit" class="bg-slate-800 hover:bg-slate-900 text-white px-6 py-3 rounded-lg font-medium transition-colors">
