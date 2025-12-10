@@ -124,9 +124,6 @@ if ($biaya_items) {
                     </p>
                 </div>
             </div>
-            <a href="print_resi.php?id=<?php echo $id; ?>" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                <i class="fas fa-print mr-1"></i> Cetak Resi
-            </a>
         </div>
 
         <?php if ($success_msg): ?>
