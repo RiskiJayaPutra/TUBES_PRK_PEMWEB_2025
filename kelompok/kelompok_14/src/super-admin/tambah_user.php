@@ -1,20 +1,28 @@
 <?php
-require "../koneksi.php";
+session_start();
+require_once "../config.php";
+
+// Cek Login Superadmin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'superadmin') {
+    header("Location: ../login.php");
+    exit();
+}
 
 if (isset($_POST['submit'])) {
     $nama = $_POST['nama'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash Password!
     $role = $_POST['role'];
 
-    $q = mysqli_query($conn, "INSERT INTO users(username, password, nama, role) 
-                              VALUES ('$username', '$password', '$nama', '$role')");
-
-    if ($q) {
+    // Gunakan Prepared Statement untuk keamanan
+    $stmt = $conn->prepare("INSERT INTO users(username, password, nama, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $username, $password, $nama, $role);
+    
+    if ($stmt->execute()) {
         header("Location: superadmin.php");
         exit;
     } else {
-        echo "Gagal menambah user!";
+        echo "Gagal menambah user: " . $conn->error;
     }
 }
 ?>
@@ -50,6 +58,7 @@ if (isset($_POST['submit'])) {
             <select name="role" class="w-full border p-2 rounded-lg mb-4">
                 <option value="admin">Admin</option>
                 <option value="teknisi">Teknisi</option>
+                <option value="superadmin">Superadmin</option>
             </select>
 
             <button name="submit"

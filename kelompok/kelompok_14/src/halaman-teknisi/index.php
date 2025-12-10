@@ -9,7 +9,20 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'teknisi') {
 }
 
 $teknisi_id = $_SESSION['user_id'];
-$teknisi_nama = $_SESSION['nama'] ?? 'Teknisi';
+$teknisi_id = $_SESSION['user_id'];
+
+// Ambil nama terbaru dari database
+$stmt_nama = $conn->prepare("SELECT nama FROM users WHERE id = ?");
+$stmt_nama->bind_param("i", $teknisi_id);
+$stmt_nama->execute();
+$res_nama = $stmt_nama->get_result();
+if ($row_nama = $res_nama->fetch_assoc()) {
+    $teknisi_nama = $row_nama['nama'];
+    $_SESSION['nama'] = $teknisi_nama; // Sync session
+} else {
+    $teknisi_nama = $_SESSION['nama'] ?? 'Teknisi';
+}
+$stmt_nama->close();
 
 // Proses update status via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
