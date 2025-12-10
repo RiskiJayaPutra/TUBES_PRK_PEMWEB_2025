@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
     $id_teknisi = $_POST['id_teknisi'] ?: null;
     $kerusakan_fix = $_POST['kerusakan_fix'];
-    $biaya = $_POST['biaya'] ? floatval($_POST['biaya']) : null;
+    // Hapus titik dari format rupiah sebelum konversi
+    $biaya = $_POST['biaya'] ? floatval(str_replace('.', '', $_POST['biaya'])) : null;
     $tgl_mulai = $_POST['tgl_mulai'] ?: null;
     $tgl_selesai = $_POST['tgl_selesai'] ?: null;
     $tgl_keluar = $_POST['tgl_keluar'] ?: null;
@@ -181,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Biaya -->
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Biaya Servis (Rp)</label>
-                    <input type="number" name="biaya" value="<?php echo $servis['biaya'] ?? ''; ?>" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 150000">
+                    <input type="text" name="biaya" value="<?php echo $servis['biaya'] ? number_format($servis['biaya'], 0, ',', '.') : ''; ?>" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 150.000" oninput="formatRupiah(this)">
                 </div>
             </div>
 
@@ -196,6 +197,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </div>
+
+<script>
+    function formatRupiah(input) {
+        let value = input.value.replace(/[^0-9]/g, '');
+        if (value) {
+            input.value = parseInt(value).toLocaleString('id-ID');
+        }
+    }
+</script>
 
 </body>
 </html>

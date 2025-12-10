@@ -37,3 +37,13 @@ CREATE TABLE IF NOT EXISTS servis (
 INSERT INTO users (username, password, nama, role) VALUES 
 ('admin', 'admin123', 'Administrator', 'admin'),
 ('teknisi', 'teknisi123', 'Teknisi 1', 'teknisi');
+
+-- Tabel rincian biaya servis
+CREATE TABLE IF NOT EXISTS biaya_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_servis INT NOT NULL,
+    nama_item VARCHAR(100) NOT NULL,
+    harga DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_servis) REFERENCES servis(id) ON DELETE CASCADE
+);
