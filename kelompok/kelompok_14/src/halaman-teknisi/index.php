@@ -83,7 +83,7 @@ $servis_list = $conn->query($query);
             </div>
             <div class="flex items-center gap-4">
                 <span class="text-gray-600 text-sm">Halo, <?php echo htmlspecialchars($teknisi_nama); ?></span>
-                <a href="../profile/profile.php" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                <a href="../../src/profile/profile.php" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
                     <i class="fas fa-user mr-1"></i> Profil
                 </a>
                 <a href="logout.php" class="text-red-600 hover:text-red-700 text-sm font-medium">

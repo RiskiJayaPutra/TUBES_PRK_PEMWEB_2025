@@ -21,8 +21,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             
-            // Cek password
-            if ($password === $user['password']) {
+            // Cek password — dukung hash (password_verify) dan fallback ke plaintext
+            $stored = $user['password'];
+            $login_ok = false;
+
+            if (is_string($stored) && preg_match('/^\$2[aby]\$|^\$argon2/i', $stored)) {
+                if (password_verify($password, $stored)) {
+                    $login_ok = true;
+                }
+            } else {
+                // Fallback: password disimpan plaintext di DB (instalasi lama)
+                if ($password === $stored) {
+                    $login_ok = true;
+                    // Re-hash password secara aman dan simpan kembali
+                    $rehash = password_hash($password, PASSWORD_DEFAULT);
+                    $upd = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
+                    $upd->bind_param("si", $rehash, $user['id']);
+                    $upd->execute();
+                    $upd->close();
+                }
+            }
+
+            if ($login_ok) {
                 // Set session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
