@@ -74,6 +74,14 @@ Pelanggan dapat melacak status servis secara real-time menggunakan Nomor Resi ta
         *   **Login Page**: `http://localhost/kelompok_14/src/login.php`
 
 5.  **Akun Default**
-    *   **Superadmin**: Username: `superadmin` / Password: `superadmin123`
-    *   **Admin**: Username: `admin` / Password: `admin123`
     *   **Teknisi**: Username: `teknisi` / Password: `teknisi123`
+
+---
+
+## 5. Desain Sistem
+
+**Entity Relationship Diagram (ERD):**
+![ERD Tubes](./gambar_erd/ERD_Tubes.png)
+
+**Schema Database:**
+![Schema Tubes](./schema_erd/schema_tubes.drawio.png)
