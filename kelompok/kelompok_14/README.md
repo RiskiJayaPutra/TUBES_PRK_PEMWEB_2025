@@ -3,9 +3,10 @@
 **Kelompok 14 - Praktikum Pemrograman Web**
 
 **Daftar Anggota:**
-1. [Nama Anggota 1] (NPM)
-2. [Nama Anggota 2] (NPM)
-3. [Nama Anggota 3] (NPM)
+1. Friskila Rohasina Simarmata (2315061043)
+2. Anggi Permata Sari (2315061044)
+3. Riski Jaya Putra (2315061065)
+4. Intan Eka Safitri (2315061064)
 
 ---
 
